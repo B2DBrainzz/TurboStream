@@ -1,0 +1,2 @@
+module PublicRoomsHelper
+end

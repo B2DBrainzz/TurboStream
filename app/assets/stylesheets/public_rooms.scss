@@ -1,0 +1,35 @@
+// Place all the styles related to the PublicRooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.chat-room {
+    height: 100vh;
+}
+
+.msg-form {
+    position: fixed;
+    bottom: 0;
+    width: 80%
+}
+.msg-content {
+    width: 80%;
+    margin-right: 5px;
+}
+
+.message-box {
+    width: fit-content;
+    max-width: 40%;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.mine {
+    background-color: aqua;
+    float: right;
+    padding: 10px
+}
+
+.theirs {
+    background-color: azure;
+    padding: 10px
+}

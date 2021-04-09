@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(public_message), locals: { current_user: current_user } do %>
+  <div class="the-container">
+  <% if current_user == public_message.user %>
+    <div class= "message-box mine ">
+      <h6 class="name">You</h6>
+      <%= public_message.content %>
+    </div>
+   <% else %> 
+   <div class= "message-box theirs ">
+      <h6 class="name"> <%= public_message.user.username %> </h6>
+      <%= public_message.content %>
+    </div>
+   <% end %>
+  </div>
+<% end %>
+
+</br>

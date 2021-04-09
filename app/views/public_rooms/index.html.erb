@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group pb_room-form col-md-3">
+    <h5 id="user-id"> Hi <%= @current_user.username %> </h5>
+        <h4> Create a new room here </h4>
+        <%= form_with(model: @public_room, remote: true, class: "d-flex" ) do |f| %>
+          <%= f.text_field :name, class: "form-control" %>
+          <%= f.submit data: { disable_with: false }, id: 'send-form', class: "btn btn-primary" %>
+        <% end %>
+      </hr>
+      <div>
+        <%= turbo_stream_from "public_rooms" %>
+        <%= turbo_frame_tag "public_rooms" do %>
+          <%= render @public_rooms %>
+        <% end %>
+      </div>
+      <%= link_to 'Sign Out', signout_path,  :method => :delete %>
+    </div> 
+    <div class="col-md-9 bg-secondary chat-room">
+      <% if @single_room %>
+        <%= turbo_frame_tag dom_id(@single_room) do %>
+          <h4 class="text-center"> <%= @single_room.name%></h4>
+        <% end %>
+        <%= turbo_stream_from "public_messages"  %>
+        <%= turbo_stream_from "public_messages", current_user %>
+        <%= turbo_frame_tag "public_messages" do %>
+          <%= render @public_messages, locals: { current_user: @current_user } %>
+        <% end %>
+        <%= turbo_frame_tag "public_message", target: :_top do %>
+          <div class="form-group msg-form">
+            <%= form_with(model: [@single_room ,@public_message], local: true, class: "d-flex" ) do |f| %>
+            <%= f.text_field :content, id: 'chat-text', class: "form-control msg-content", placeholder: 'Type message here' %>
+            <%= f.submit data: { disable_with: false }, id: 'send-form', class: "btn btn-primary" %>
+            <% end %> 
+          <% end %>   
+      <% end %>
+    </div>
+  </div>
+</div>

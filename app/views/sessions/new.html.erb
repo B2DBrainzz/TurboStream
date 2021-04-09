@@ -1,0 +1,5 @@
+<%= form_for (:session) do |f| %>
+  <%= f.label :name, 'Enter your username' %>
+  <%= f.text_field :username %>  
+  <%= f.submit   'Sign in' %>
+  <% end %>
